@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ComparisonSlider from "../components/ComparisonSlider.astro";
+import { Image } from "astro:assets";
+import lipopapadaAfter from "../assets/images/treatments/lipopapada/lipopapada-after.png";
+import lipopapadaBefore from "../assets/images/treatments/lipopapada/lipopapada-before.png";
+---
+
+<Layout title="Lipopapada - Clínica Odontológica">
+    <section class="services-section">
+        <h2 class="section-title">LIPOPAPADA</h2>
+        <div class="about-container">
+            <div class="about-text animate-hidden slide-left">
+                <h3>Define tu cuello</h3>
+                <p>
+                    La lipopapada es un procedimiento mínimamente invasivo
+                    destinado a eliminar la grasa localizada en la zona del
+                    cuello, mejorando el ángulo cérvico-mandibular.
+                </p>
+                <p>
+                    El resultado es un cuello más estilizado y un rostro más
+                    juvenil y definido.
+                </p>
+            </div>
+            <div class="about-image animate-hidden slide-right">
+                <Image
+                    src={lipopapadaAfter}
+                    alt="Lipopapada Resultado"
+                    style="box-shadow: none; border-radius: 10px;"
+                />
+            </div>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 50px;">CASOS DE ÉXITO</h3>
+        <ComparisonSlider
+            beforeImage={lipopapadaBefore}
+            afterImage={lipopapadaAfter}
+            beforeLabel="Antes"
+            afterLabel="Después"
+        />
+    </section>
+</Layout>

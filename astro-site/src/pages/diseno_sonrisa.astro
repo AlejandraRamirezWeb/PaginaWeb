@@ -1,0 +1,45 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ComparisonSlider from "../components/ComparisonSlider.astro";
+import { Image } from "astro:assets";
+import disenoAfter from "../assets/images/treatments/diseno_sonrisa/diseno-after.png";
+import disenoBefore from "../assets/images/treatments/diseno_sonrisa/diseno-before.png";
+---
+
+<Layout title="Diseño de Sonrisa - Clínica Odontológica">
+    <section class="services-section">
+        <h2 class="section-title">DISEÑO DE SONRISA</h2>
+        <div class="about-container">
+            <div class="about-text animate-hidden slide-left">
+                <h3>Transforma tu sonrisa</h3>
+                <p>
+                    El diseño de sonrisa es un conjunto de procedimientos
+                    necesarios para establecer un estado de armonía entre los
+                    dientes, encías y labios.
+                </p>
+                <p>
+                    Analizamos tu rostro y personalidad para crear la sonrisa
+                    que siempre has soñado, utilizando carillas de alta estética
+                    y tecnología digital.
+                </p>
+            </div>
+            <div class="about-image animate-hidden slide-right">
+                <Image
+                    src={disenoAfter}
+                    alt="Diseño de Sonrisa Resultado"
+                    style="box-shadow: none; border-radius: 10px;"
+                />
+            </div>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 50px;">
+            TRANSFORMACIONES
+        </h3>
+        <ComparisonSlider
+            beforeImage={disenoBefore}
+            afterImage={disenoAfter}
+            beforeLabel="Antes"
+            afterLabel="Después"
+        />
+    </section>
+</Layout>
