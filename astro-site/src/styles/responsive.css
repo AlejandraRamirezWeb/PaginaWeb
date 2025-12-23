@@ -1,0 +1,180 @@
+/* --- Responsive Design --- */
+
+/* Mobile Menu Button - Hidden on Desktop */
+.mobile-menu-btn {
+    display: none;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+
+    /* Header & Navigation */
+    .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.8rem;
+        cursor: pointer;
+        position: absolute;
+        top: 25px;
+        right: 20px;
+        z-index: 1001;
+    }
+
+    .navbar {
+        background-color: #232323;
+        padding: 0;
+        margin-top: 10px;
+        position: relative;
+    }
+
+    .nav-links {
+        display: none;
+        /* Hidden by default */
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background-color: #1a1a1a;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .nav-links.active {
+        display: flex;
+        /* Show when active */
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+        font-size: 1.1rem;
+    }
+
+    /* Cart Icon Alignment Fix */
+    .nav-links .cart-icon-container {
+        justify-content: center;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    /* Dropdowns in Mobile */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-content {
+        position: relative;
+        width: 100%;
+        background-color: #2a2a2a;
+        box-shadow: none;
+        top: 0;
+        display: none;
+        /* Keep hidden until hovered/clicked - simple CSS hover works poorly on mobile usually, but keeping simple for now. JS toggle covers main menu. */
+    }
+
+    /* Make dropdowns visible by default in open menu to avoid complexity or rely on separate toggle? 
+       Let's simpler approach: expanded by default or style them clearly. 
+       Actually, standard simple behavior: show them relative. 
+       For "click" support on parent items we might need more JS, but for now let's assume valid hover or simple indentation. */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content a {
+        padding: 10px 0;
+        font-size: 0.95rem;
+    }
+
+    /* Hero Carousel */
+    .carousel-slide img {
+        height: 250px;
+        /* Smaller height for mobile */
+    }
+
+    .carousel-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* Top Bar */
+    .top-bar-container {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .social-icons-top {
+        margin-bottom: 5px;
+        justify-content: center;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .contact-info a {
+        margin-left: 0;
+    }
+
+    /* Sections */
+    .section-title {
+        font-size: 1.5rem;
+        margin: 40px 0 20px;
+    }
+
+    /* Grids */
+    .services-grid,
+    .products-grid {
+        grid-template-columns: 1fr;
+        /* Stack vertically */
+        padding: 0 15px;
+    }
+
+    .services-section,
+    .products-section {
+        padding: 40px 10px;
+    }
+
+    /* About Section */
+    .about-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .about-text,
+    .about-image {
+        min-width: 100%;
+    }
+
+    /* Footer */
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-col {
+        min-width: 100%;
+        padding: 0;
+    }
+
+    .site-footer {
+        padding: 40px 15px;
+    }
+
+
+}
+
+/* Small phones */
+@media screen and (max-width: 480px) {
+    .logo {
+        max-width: 180px;
+    }
+}

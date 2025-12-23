@@ -36,64 +36,85 @@ import Layout from "../layouts/Layout.astro";
     const ref = document.getElementById("ref");
     const total = document.getElementById("total");
 
-    if (transactionId) {
-        // Consultar el estado de la transacción a Wompi
-        fetch(`https://production.wompi.co/v1/transactions/${transactionId}`)
-            .then((response) => response.json())
-            .then((data) => {
-                const transaction = data.data;
-                const status = transaction.status;
+    if (loader && content && icon && title && message && ref && total) {
+        if (transactionId) {
+            // Consultar el estado de la transacción a Wompi
+            fetch(
+                `https://production.wompi.co/v1/transactions/${transactionId}`,
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    const transaction = data.data;
+                    const status = transaction.status;
 
-                loader.style.display = "none";
-                content.style.display = "block";
+                    import("../store/cartStore").then(({ clearCart }) => {
+                        clearCart();
+                    });
 
-                ref.innerText = transaction.reference;
+                    loader.style.display = "none";
+                    content.style.display = "block";
 
-                // Formatear precio
-                const price = transaction.amount_in_cents / 100;
-                total.innerText = new Intl.NumberFormat("es-CO", {
-                    style: "currency",
-                    currency: "COP",
-                }).format(price);
+                    ref.innerText = transaction.reference;
 
-                if (status === "APPROVED") {
-                    icon.className = "fas fa-check-circle success";
-                    title.innerText = "¡Pago Exitoso!";
+                    // Formatear precio
+                    const price = transaction.amount_in_cents / 100;
+                    total.innerText = new Intl.NumberFormat("es-CO", {
+                        style: "currency",
+                        currency: "COP",
+                    }).format(price);
+
+                    if (status === "APPROVED") {
+                        icon.className = "fas fa-check-circle success";
+                        title.innerText = "¡Pago Exitoso!";
+                        message.innerText =
+                            "Gracias por tu compra. Te contactaremos pronto para confirmar el envío.";
+                    } else if (status === "DECLINED") {
+                        icon.className = "fas fa-times-circle error";
+                        title.innerText = "Pago Rechazado";
+                        message.innerText =
+                            "Lo sentimos, tu transacción ha sido rechazada. Por favor intenta con otro medio de pago.";
+                    } else if (status === "VOIDED") {
+                        icon.className = "fas fa-ban error";
+                        title.innerText = "Pago Anulado";
+                        message.innerText = "La transacción ha sido anulada.";
+                    } else if (status === "ERROR") {
+                        icon.className = "fas fa-exclamation-circle error";
+                        title.innerText = "Error en el Pago";
+                        message.innerText =
+                            "Ocurrió un error procesando tu pago. Por favor intenta de nuevo.";
+                    } else {
+                        icon.className = "fas fa-question-circle warning";
+                        title.innerText = "Estado Desconocido";
+                        message.innerText = `El estado de tu transacción es: ${status}`;
+                    }
+
+                    // Redirect to checkout/cart after delay
+                    setTimeout(() => {
+                        window.location.href = "/checkout";
+                    }, 4000);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    loader.style.display = "none";
+                    content.style.display = "block";
+                    title.innerText = "Error de conexión";
                     message.innerText =
-                        "Gracias por tu compra. Te contactaremos pronto para confirmar el envío.";
-                } else if (status === "DECLINED") {
-                    icon.className = "fas fa-times-circle error";
-                    title.innerText = "Pago Rechazado";
-                    message.innerText =
-                        "Lo sentimos, tu transacción ha sido rechazada. Por favor intenta con otro medio de pago.";
-                } else if (status === "VOIDED") {
-                    icon.className = "fas fa-ban error";
-                    title.innerText = "Pago Anulado";
-                    message.innerText = "La transacción ha sido anulada.";
-                } else if (status === "ERROR") {
-                    icon.className = "fas fa-exclamation-circle error";
-                    title.innerText = "Error en el Pago";
-                    message.innerText =
-                        "Ocurrió un error procesando tu pago. Por favor intenta de nuevo.";
-                } else {
-                    icon.className = "fas fa-question-circle warning";
-                    title.innerText = "Estado Desconocido";
-                    message.innerText = `El estado de tu transacción es: ${status}`;
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-                loader.style.display = "none";
-                content.style.display = "block";
-                title.innerText = "Error de conexión";
-                message.innerText =
-                    "No pudimos verificar el estado del pago. Por favor contacta a soporte.";
-            });
-    } else {
-        loader.style.display = "none";
-        content.style.display = "block";
-        title.innerText = "No hay transacción seleeccionada";
-        message.innerText = "Regresa a la tienda para realizar una compra.";
+                        "No pudimos verificar el estado del pago. Por favor contacta a soporte.";
+
+                    // Still clear and redirect on error if requested by "ya sea por error..."
+                    import("../store/cartStore").then(({ clearCart }) => {
+                        clearCart();
+                    });
+                    setTimeout(() => {
+                        window.location.href = "/checkout";
+                    }, 4000);
+                });
+        } else {
+            loader.style.display = "none";
+            content.style.display = "block";
+            title.innerText = "No hay transacción seleeccionada";
+            message.innerText = "Regresa a la tienda para realizar una compra.";
+        }
     }
 </script>
 

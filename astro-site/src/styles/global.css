@@ -397,6 +397,8 @@ header {
     gap: 50px;
 }
 
+
+
 .about-text,
 .about-image {
     flex: 1;
@@ -487,6 +489,15 @@ header {
     margin: 5px 0;
     color: #b6b2b2;
     font-size: 0.95rem;
+}
+
+.footer-link-text {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer-link-text:hover {
+    color: #fff;
 }
 
 /* Layout Specifics */

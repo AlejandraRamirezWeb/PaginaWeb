@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import "../styles/responsive.css";
 import { Image } from "astro:assets";
 import logo from "../assets/logo.png";
 import favicon from "../assets/images/branding/favicon.svg";
@@ -72,7 +73,7 @@ const { title } = Astro.props;
 				</div>
 				<div class="contact-info">
 					<span
-						><i class="fas fa-envelope"></i> contacto@gmail.com</span
+						><i class="fas fa-envelope"></i> odont.alejandra@gmail.com</span
 					>
 					<a
 						href="https://www.google.com/maps/place/Dra+.+Alejandra+Ram%C3%ADrez+mayorga/@7.0003808,-73.0580465,18z/data=!4m6!3m5!1s0x8e6847e66d986913:0x91d0b643721d56f5!8m2!3d7.0008414!4d-73.0558149!16s%2Fg%2F11nxqvjd3z?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D"
@@ -98,6 +99,9 @@ const { title } = Astro.props;
 				</a>
 			</div>
 			<nav class="navbar">
+				<button class="mobile-menu-btn" aria-label="Abrir menú">
+					<i class="fas fa-bars"></i>
+				</button>
 				<ul class="nav-links">
 					<li><a href="/">INICIO</a></li>
 					<li class="dropdown">
@@ -129,6 +133,26 @@ const { title } = Astro.props;
 				</ul>
 			</nav>
 		</header>
+		<script>
+			const menuBtn = document.querySelector(".mobile-menu-btn");
+			const navLinks = document.querySelector(".nav-links");
+
+			if (menuBtn && navLinks) {
+				menuBtn.addEventListener("click", () => {
+					navLinks.classList.toggle("active");
+					const icon = menuBtn.querySelector("i");
+					if (icon) {
+						if (navLinks.classList.contains("active")) {
+							icon.classList.remove("fa-bars");
+							icon.classList.add("fa-times");
+						} else {
+							icon.classList.remove("fa-times");
+							icon.classList.add("fa-bars");
+						}
+					}
+				});
+			}
+		</script>
 	</body>
 </html>
 
@@ -143,7 +167,7 @@ const { title } = Astro.props;
 <footer class="site-footer">
 	<div class="footer-container">
 		<div class="footer-col">
-			<h3>Redes Sociales</h3>
+			<h3>Redes sociales</h3>
 			<div class="social-links-footer">
 				<a
 					href="https://wa.me/573223413034"
@@ -170,18 +194,27 @@ const { title } = Astro.props;
 		</div>
 		<div class="footer-col center-col">
 			<h4>Horario de atención</h4>
-			<p>Lunes a Viernes: 8am a 6pm</p>
-			<p>Sábados: 8am a 12m</p>
+			<p>Lunes a sábado: 8 am a 6:30 pm</p>
 		</div>
 		<div class="footer-col">
-			<h3>Dra. Alejandra Ramirez<br />Consultorio dental</h3>
+			<h3>Alejandra Ramirez<br />Clinica odontológica</h3>
 			<p><strong>Dirección</strong></p>
-			<p>Junín 4, Cl. 5N # 9-04</p>
-			<p>Piedecuesta, Santander</p>
+			<a
+				href="https://www.google.com/maps/place/Dra+.+Alejandra+Ram%C3%ADrez+mayorga/@7.0003808,-73.0580465,18z/data=!4m6!3m5!1s0x8e6847e66d986913:0x91d0b643721d56f5!8m2!3d7.0008414!4d-73.0558149!16s%2Fg%2F11nxqvjd3z?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D"
+				target="_blank"
+				class="footer-link-text"
+			>
+				<p>Junín 4, Cl. 5N # 9-04</p>
+				<p>Piedecuesta, Santander</p>
+			</a>
 
 			<br />
-			<p><a href="https://wa.me/573223413034">322 341 30 34</a></p>
-			<p>contacto@gmail.com</p>
+			<p>
+				<a href="https://wa.me/573223413034" class="footer-link-text"
+					>322 341 30 34</a
+				>
+			</p>
+			<p>odont.alejandra@gmail.com</p>
 		</div>
 	</div>
 </footer>

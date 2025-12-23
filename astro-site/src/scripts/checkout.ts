@@ -238,7 +238,7 @@ async function renderPaymentStep() {
         redirectUrl.searchParams.append("amount-in-cents", totalInCents.toString());
         redirectUrl.searchParams.append("reference", reference);
         redirectUrl.searchParams.append("signature:integrity", signature);
-        redirectUrl.searchParams.append("redirect-url", "https://draalejandraramirez.netlify.app/respuesta");
+        redirectUrl.searchParams.append("redirect-url", "https://draalejandra-ramirez.netlify.app/respuesta");
 
         // Customer Data (Optional - check if removing fixes 403 if persists)
         if (customerData.email) redirectUrl.searchParams.append("customer-data:email", customerData.email);
